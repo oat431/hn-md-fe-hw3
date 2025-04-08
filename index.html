@@ -15,6 +15,7 @@
                     <div id="guessForm" class="text-center">
                         <p class="fs-4">attemps: <span id="attemps"></span></p>
                         <input
+                            onkeydown="checkInt(event)"
                             type="number"
                             id="guess"
                             class="form-control mb-3"
@@ -76,6 +77,19 @@
                 } else {
                     result.innerHTML = `${guessInput} is a Correct Guess!`;
                     result.className = "text-success";
+                }
+            }
+            function isInteger(value) {
+                return /^[0-9]+$/.test(value);
+            }
+            function isAllowedKey(key) {
+                const allowedKeys = ["Backspace", "Enter"];
+                return allowedKeys.includes(key);
+            }
+            function checkInt(event) {
+                const key = event.key;
+                if (!isAllowedKey(key) && !isInteger(key)) {
+                    event.preventDefault();
                 }
             }
         </script>
